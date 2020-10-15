@@ -5,6 +5,7 @@ import com.java.dao.StudentDao;
 import com.java.dao.impl.StudentImpl;
 import com.java.service.StudentService;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -19,5 +20,20 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<Student> getAll() {
         return student.getAll();
+    }
+
+    @Override
+    public List<Student> addStudent() throws SQLException {
+        return student.addStudent();
+    }
+
+    @Override
+    public List<Student> deleteStudent() {
+        return student.deleteStudent();
+    }
+
+    @Override
+    public List<Student> altStudent() {
+        return student.altStudent();
     }
 }

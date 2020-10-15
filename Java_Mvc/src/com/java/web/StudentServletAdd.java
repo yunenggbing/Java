@@ -9,25 +9,38 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
  * @Author: YNB
- * @Description:
- * @Date Created in 2020-10-14 21:28
+ * @Description:向数据表中添加新数据
+ * @Date Created in 2020-10-15 21:59
  * @Modified By:
  */
-//@WebServlet(value = "/getallstudent")
-@WebServlet(value = "/myform")
-public class StudentServlet  extends HttpServlet {
+@WebServlet(value = "/addData")
+public class StudentServletAdd  extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("utf-8");
+        System.out.println("AddData");
         //1.接受参数    指的是接收浏览器的数据
-
-
+        String stuname = req.getParameter("uname");
+        String stunum = req.getParameter("stunum");
+        String stuage = req.getParameter("stuage");
+        String gradeid = req.getParameter("gradeid");
+        System.out.println("姓名："+stuname);
+        System.out.println("学号："+stunum);
+        System.out.println("年龄："+stuage);
+        System.out.println("年级："+gradeid);
         //2.读取service方法
         StudentServiceImpl studentService = new StudentServiceImpl();
-        List<Student> student = studentService.getAll();
+        List<Student> student = null;
+        try {
+            student = studentService.addStudent();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         //3.跳转页面
         req.setAttribute("students",student);
