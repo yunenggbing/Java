@@ -4,7 +4,6 @@ import com.java.bean.Student;
 import com.java.dao.StudentDao;
 import com.java.util.DruidUtil;
 
-import javax.servlet.http.HttpServletRequest;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +36,8 @@ public class StudentImpl extends DruidUtil implements StudentDao {
                 student.setStunum(resultSet.getString("stunum"));
                 student.setStuname(resultSet.getString("stuname"));
                 student.setStuage(resultSet.getInt("stuage"));
-                student.setGradeid(resultSet.getInt("gradeid"));
+//                student.setGradeid(resultSet.getString("gradeid"));
+                student.setGradeid(resultSet.getString("gradeid"));
 
                 list.add(student);
             }
@@ -52,31 +52,44 @@ public class StudentImpl extends DruidUtil implements StudentDao {
 
     //通过网页中的数据向数据表中添加
     @Override
-    public List<Student> addStudent() throws SQLException {
+    public int addStudent(String stuname,String stunum,String stuage,String gradeid) throws SQLException {
 
-        List list = new ArrayList();
         Connection conn = null;
-//        PreparedStatement preparedStatement = null;
+        conn = getConnection();
         Statement state = conn.createStatement();
-        int flag = state.executeUpdate("insert into person values(1,'张三'),(2,'李四'),(3,'王二麻子')");
+        String sql = "insert into student values('"+stuname+"','"+stunum+"','"+stuage+"','"+gradeid+"')";
+         int flag = state.executeUpdate(sql);
         state.close();
         conn.close();
-        System.out.println("返回:"+flag);
-        return null;
+//        System.out.println("返回:"+flag);
+        return flag;
     }
 
     @Override
-    public List<Student> deleteStudent() {
-        return null;
+    public int  deleteStudent(String stuname, String stunum, String stuage, String gradeid) throws SQLException {
+        Connection conn = null;
+        conn = getConnection();
+        Statement state = conn.createStatement();
+        String sql = "DELETE from student where stuname='"+stuname+"' and stunum = '"+stunum+"' and stuage = '"+stuage+"'and gradeid = '"+gradeid+"'";
+        int flag = state.executeUpdate(sql);
+        state.close();
+        conn.close();
+//        System.out.println("返回:"+flag);
+        return flag;
     }
 
     @Override
-    public List<Student> altStudent() {
-        return null;
+    public int  altStudent(String stuname, String stunum, String stuage, String gradeid) throws SQLException {
+        Connection conn = null;
+        conn = getConnection();
+        Statement state = conn.createStatement();
+        String sql = "update  student  set stuage='"+stuage+"', gradeid='"+gradeid+"'  where stuname='"+stuname+"' and stunum = '"+stunum+"' ";
+        int flag = state.executeUpdate(sql);
+        state.close();
+        conn.close();
+//        System.out.println("返回:"+flag);
+        return flag;
     }
-
-
-
 
 
 }

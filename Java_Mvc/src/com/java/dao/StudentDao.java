@@ -18,11 +18,11 @@ public interface StudentDao {
     public List<Student> getAll();
 
     //增加学生
-    public List<Student> addStudent() throws SQLException;
+    public int addStudent(String stuname,String stunum,String stuage,String gradeid) throws SQLException;
 
     //删除指定信息的学生
-    public  List<Student>  deleteStudent();
+    public  int  deleteStudent(String stuname,String stunum,String stuage,String gradeid) throws SQLException;
 
     //修改指定学生的信息
-    public  List<Student> altStudent();
+    public  int altStudent(String stuname,String stunum,String stuage,String gradeid) throws SQLException;
 }

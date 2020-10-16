@@ -12,12 +12,12 @@ public class Student {
     private String stuname;
     private String stunum;
     private int stuage;
-    private int gradeid;
+    private String gradeid;
 
     public Student() {
     }
 
-    public Student(String stuname, String stunum, int stuage, int gradeid) {
+    public Student(String stuname, String stunum, int stuage, String gradeid) {
         this.stuname = stuname;
         this.stunum = stunum;
         this.stuage = stuage;
@@ -48,11 +48,11 @@ public class Student {
         this.stuage = stuage;
     }
 
-    public int getGradeid() {
+    public String getGradeid() {
         return gradeid;
     }
 
-    public void setGradeid(int gradeid) {
+    public void setGradeid(String gradeid) {
         this.gradeid = gradeid;
     }
 }

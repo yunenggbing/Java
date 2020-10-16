@@ -23,17 +23,18 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<Student> addStudent() throws SQLException {
-        return student.addStudent();
+    public int addStudent(String stuname, String stunum, String stuage, String gradeid) throws SQLException {
+        return student.addStudent(stuname,stunum,stuage,gradeid);
     }
 
     @Override
-    public List<Student> deleteStudent() {
-        return student.deleteStudent();
+    public int deleteStudent(String stuname, String stunum, String stuage, String gradeid) throws SQLException {
+        return student.deleteStudent(stuname,stuname,stuage,gradeid);
     }
 
     @Override
-    public List<Student> altStudent() {
-        return student.altStudent();
+    public int altStudent(String stuname, String stunum, String stuage, String gradeid) throws SQLException {
+        return student.altStudent(stuname,stunum,stuage,gradeid);
     }
+
 }

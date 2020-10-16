@@ -1,6 +1,7 @@
 package com.java.web;
 
 import com.java.bean.Student;
+import com.java.dao.impl.StudentImpl;
 import com.java.service.impl.StudentServiceImpl;
 
 import javax.servlet.ServletException;
@@ -33,18 +34,34 @@ public class StudentServletAdd  extends HttpServlet {
         System.out.println("学号："+stunum);
         System.out.println("年龄："+stuage);
         System.out.println("年级："+gradeid);
+
         //2.读取service方法
-        StudentServiceImpl studentService = new StudentServiceImpl();
-        List<Student> student = null;
+
+        //执行Dao层
+        StudentServiceImpl stuiml = new StudentServiceImpl();
+        int flag = 0;
         try {
-            student = studentService.addStudent();
-        } catch (SQLException e) {
-            e.printStackTrace();
+            flag = stuiml.addStudent(stuname,stunum,stuage,gradeid);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
 
+//        StudentServiceImpl studentService = new StudentServiceImpl();
+//        List<Student> student = null;
+//        try {
+//            student = studentService.addStudent();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+
         //3.跳转页面
-        req.setAttribute("students",student);
-//        req.getRequestDispatcher("show.jsp").forward(req,resp);
-        req.getRequestDispatcher("show.jsp").forward(req,resp);
+//        req.setAttribute("students",student);
+        if (flag == 0 ){
+            req.getRequestDispatcher("failure.jsp").forward(req,resp);
+        }else  {
+            req.getRequestDispatcher("success.jsp").forward(req,resp);
+        }
+
+
     }
 }
